@@ -4,20 +4,41 @@
 <head>
     <title>Data Entry</title>
     <link href="styles/reset.css" rel="stylesheet" />
-    <link href="styles/style.css" rel="stylesheet" />
-    <script src="scripts/data_entry.js" defer />
-    <script src="scripts/script.js" defer></script>
+    <link href="styles/data_entry.css" rel="stylesheet" />
+    <script src="scripts/data_entry.js" async></script>
+    <script src="../Shared/scripts/po_shared.js" async></script>
 </head>
 
 <body>
     <table id="dataTable">
-        <tr> 
-            <th>Item Code</th>
-            <th>Item Description</th>
-            <th>Item Location</th>
-            <th>Expiration Date</th>
-            <th># of Stickers</th>
-        </tr>
+        <colgroup>
+            <col style="width: 10%">
+            <col style="width: 28%">
+        </colgroup>
+
+        <thead>
+            <tr id="headerRow">
+                <td colspan="3">
+                    <select id="poNumberSelector">
+                        <option id="createNewPO">Create New</option>
+                    </select>
+                </td>
+                <td id="buttons" colspan="2">
+                    <button id="saveBtn">Save</button>
+                    <button id="printBtn">Print Stickers</button>
+                    <button id="deleteBtn">Delete</button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Item Code</th>
+                <th>Item Description</th>
+                <th>Item Location</th>
+                <th>Expiration Date</th>
+                <th># of Stickers</th>
+            </tr>
+        </tbody>
     </table>
 </body>
 

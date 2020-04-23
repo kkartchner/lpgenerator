@@ -25,6 +25,7 @@ li, main, nav, ol, p, section, span, ul {
    -moz-box-sizing: border-box;
    box-sizing: border-box;
 }
+
 nav ul { 
         list-style: none;
         list-style-image: none;
