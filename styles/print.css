@@ -27,18 +27,14 @@ span.description {
     font-family: Calibri;
     font-weight: bold;
 }
-span.location {
-    font-size: 90pt;
-    font-family: Arial;
-    font-weight: bold;
-}
-span.expiration {
-    font-size: 60pt;
+span.itemCode {
+    font-size: 40pt;
     font-family: Calibri;
     font-weight: bold;
 }
 
-div.qrCode {
-    width: 100%;
-    margin: 0 auto;
+div.expDateLine {
+    margin: 100px 50px 0 50px;
+    padding-top: 10px;
+    border-top: 1px solid black;
 }

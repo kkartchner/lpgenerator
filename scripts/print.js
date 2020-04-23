@@ -1,6 +1,6 @@
 "use strict";
 window.onload = function () {
-    let options = ["description", "location", "expiration", "itemCode"];
+    let options = ["description", "itemCode"];
     this.generatePlates(options);
     window.print();
 }
@@ -21,7 +21,11 @@ function generatePlates(options) {
 
     for (const op of options) { // Store arrays to data map
         let key = "print_" + op + "s";
-        dataMap.set(key, JSON.parse(localStorage[key]));
+        try {
+            dataMap.set(key, JSON.parse(localStorage[key]));
+        } catch(err) {
+
+        }
     }
 
     let stickerCount = maxArrayLength(dataMap);
@@ -39,29 +43,39 @@ function generatePlates(options) {
             let newRow = document.createElement("tr");
 
             for (var col = 0; col < PLATES_PER_ROW; ++col) {
-                let newTD = document.createElement("td");
-                newTD.className = "sticker";
-                if (stkrIndex < stickerCount) {
-                    for (const op of options) {
-                        if (op !== "itemCode") {
-                            let opSpan = document.createElement("span");
-                            opSpan.className = op;
-                            opSpan.innerHTML = dataMap.get("print_" + op + "s")[stkrIndex];
-                            newTD.appendChild(opSpan);
-                        }
-                    }
+               let newTD = document.createElement("td");
+               newTD.className = "sticker";
+               if (stkrIndex < stickerCount) {
+                   let desc = dataMap.get("print_descriptions")[stkrIndex];
+
+                   newTD.innerHTML = "<span class='description'>" + desc + "</span>";
+
+
+                    let expDateLine = document.createElement("div");
+                    expDateLine.className = "expDateLine";
+                    expDateLine.innerHTML = "Best By";
+                    newTD.appendChild(expDateLine);
+
+                   let code = dataMap.get("print_itemCodes")[stkrIndex];
+                    let itemCode = document.createElement("span");
+                    itemCode.className = "itemCode";
+                    itemCode.innerHTML = code;
+
+                    newTD.appendChild(itemCode);
+
                     let qrDiv = document.createElement("div");
                     qrDiv.className = "qrCode";
 
                     newTD.appendChild(qrDiv);
 
                     let qrCode = new QRCode(qrDiv, {
-                        width: 50,
-                        height: 50
+                        width: 60,
+                        height: 60
                     });
 
                     let qrData = dataMap.get("print_itemCodes")[stkrIndex];
                     qrCode.makeCode(qrData);
+
 
                     ++stkrIndex;
                 }

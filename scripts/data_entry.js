@@ -1,7 +1,7 @@
 "use strict";
 
 let vars = {
-    inputClasses: ["itemCode", "description", "location", "expiration", "stickerNum"],
+    inputClasses: ["itemCode", "description", "palletNum"]
 }
 
 window.onload = initialize;
@@ -9,17 +9,17 @@ window.onload = initialize;
 function initialize() {
     document.getElementById("printBtn").onclick = goToPrintPage;
     document.getElementById("saveBtn").onclick = function () {
-        shared.saveCurrentPO(onSavePO);
+        shared.saveCurrentPO(onPOSaved);
     }
     document.getElementById("deleteBtn").onclick = function () {
         shared.deleteCurrentPO(onDeletePO);
     }
 
-    shared.loadSavedPONumbers(onPOLoaded, onNewPOCreated, onPOChange);
+    shared.loadSavedPONumbers(onPOLoaded, onNewPOCreated, onPOChanged);
 }
 
-function onPOChange(e){
-    shared.onPONumberChange(e, onNewPOCreated, onPOLoaded, onSavePO);
+function onPOChanged(e) {
+    shared.onPONumberChange(e, onNewPOCreated, onPOLoaded, onPOSaved);
 }
 
 function onNewPOCreated() {
@@ -61,7 +61,7 @@ function loadInputBoxData() {
 /***************************************************************************************
  * Save the data of the currently selected PO to local storage.
  ***************************************************************************************/
-function onSavePO(){
+function onPOSaved() {
     /* Save input box data */
     let dataMap = new Map();
     for (const c of vars.inputClasses) {
@@ -116,7 +116,6 @@ function addNewLine(dataMap = null, i = -1) {
             try {
                 newInput.value = dataMap.get(c)[i];
             } catch (err) {
-                window.alert(err);
             }
         }
         if (newInput.className === vars.inputClasses[vars.inputClasses.length - 1]) {
@@ -156,7 +155,7 @@ function onNewLineInputBoxChange(e) {
  ***************************************************************************************/
 function goToPrintPage() {
     /* Save input box data */
-    var stickerNumList = document.getElementsByClassName("stickerNum");
+    var stickerNumList = document.getElementsByClassName("palletNum");
     let dataMap = new Map();
     for (const c of vars.inputClasses) {
         if (c !== "stickerNum") {
@@ -164,9 +163,8 @@ function goToPrintPage() {
             /* Add value to value array if one exists, otherwise add blank space */
             let elementValues = [];
             for (var i = 0; i < elements.length; ++i) {
-                let stickerNum = stickerNumList[i].value.length > 0 ? stickerNumList[i].value : 1;
-                if (elements[i].value.length > 0) {
-                    for (var j = 0; j < stickerNum; ++j) {
+                for (var times = 0; times < stickerNumList[i].value; ++times){
+                    if (elements[i].value.length > 0) {
                         elementValues.push(elements[i].value);
                     }
                 }

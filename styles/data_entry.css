@@ -6,7 +6,7 @@ table {
 }
 
 body {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0px auto;
 }
 
@@ -18,10 +18,9 @@ table#dataTable {
 table#dataTable th, table#dataTable td {
     text-align: center;
     border: 1px solid black;
-    width: 20%;
 }
-table#dataTable input {
-    width: 90%;
+input.description {
+    width: 300px;
 }
 table#dataTable tr#headerRow td {
     padding: 20px;
@@ -32,5 +31,5 @@ table#dataTable tr#headerRow td#buttons {
     text-align: right;
 }
 table#dataTable tr#headerRow select {
-    width: 200px;
+    width: 180px;
 }

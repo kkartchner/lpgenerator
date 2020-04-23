@@ -6,19 +6,14 @@
     <link href="styles/reset.css" rel="stylesheet" />
     <link href="styles/data_entry.css" rel="stylesheet" />
     <script src="scripts/data_entry.js" async></script>
-    <script src="../Shared/scripts/po_shared.js" async></script>
+    <script src="scripts/po_shared.js" async></script>
 </head>
 
 <body>
     <table id="dataTable">
-        <colgroup>
-            <col style="width: 10%">
-            <col style="width: 28%">
-        </colgroup>
-
         <thead>
             <tr id="headerRow">
-                <td colspan="3">
+                <td colspan="1">
                     <select id="poNumberSelector">
                         <option id="createNewPO">Create New</option>
                     </select>
@@ -34,10 +29,7 @@
             <tr>
                 <th>Item Code</th>
                 <th>Item Description</th>
-                <th>Item Location</th>
-                <th>Expiration Date</th>
-                <th># of Stickers</th>
-            </tr>
+                <th>Pallet Num</th>
         </tbody>
     </table>
 </body>
